@@ -1,10 +1,11 @@
 
 <h1>Intro</h1>
 
-Abigail Ward
-Thesis F2013-S2014
-Princeton University
-Advisor: Naveen Verma
+<p>Abigail Ward</p>
+<p>Thesis F2013-S2014</p>
+<p>Princeton University</p>
+<p>Advisor: Naveen Verma</p>
+
 
 <h1>Code</h1>
 
