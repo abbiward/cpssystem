@@ -1,0 +1,13 @@
+#!/bin/bash
+
+GESTNAME='tap/'
+DIRNAME='apr26/'$GESTNAME
+
+mkdir $DIRNAME
+mkdir $DIRNAME'calibration'
+mkdir $DIRNAME'adc'
+mkdir $DIRNAME'deltaf'
+mkdir $DIRNAME'position'
+mkdir $DIRNAME'positiongest'
+mkdir $DIRNAME'positionwindow'
+

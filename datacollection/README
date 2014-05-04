@@ -1,0 +1,14 @@
+
+# Make the necessary directories for the gesture collection process
+./script-mkdirs
+
+# collect a sample
+../../env/bin/python collectsample.py 4 apr26/gesttype/ samplename 
+
+# Convert all the positions collected to a path 
+../../env/bin/python converttopath.py apr26/gesttype/positiongest/ apr26/gesttype/positionwindow/
+
+
+# Show all the samples
+tail +1 apr26/circle/positionwindow/*
+

@@ -1,0 +1,103 @@
+
+# Connecting Bluetooth
+
+screen /dev/cu.usbserial-AE00FRN7 115200
+
+# Hook up to circuit board via AT command
+
+    # ITO screen
+ATDMLE,ECFE7E107107
+
+    # Big posterboard
+ATDMLE,ECFE7E1067AC
+
+# Visualize ADC output
+
+../env/bin/python testpyserial.py stdout 40
+
+# Run the demo
+
+../env/bin/python rundemo.py 
+
+    # Press "z" to record sample points
+    # Click to stop the demo. 
+
+
+# Running and recording stuff
+
+../env/bin/python rundemo.py 
+vim script-extractvalues
+# edit time stamp, view output file names
+./script-extractvalues
+
+
+############################################
+
+Key parameters to keep in mind for calibration:
+    Pipeline: ADC_LOW_THRESHOLD
+    PositionTracker: num_samples_to_avg
+        z-position: threshold_channel, max_sum_value
+        xy-position: value_threshold, threshold_ratio
+    CursorDemo: z_pos_limit
+
+How to judge what parameters should be:
+
+Pipeline: ADC_LOW_THRESHOLD
+    Look at ADC readout and see what base values are (and if they inc/dec with proximity)
+
+PositionTracker num_samples_to_avg
+    acceptable range: 2-6?
+    If lag is really bad, reduce
+    If noise for xyposition is really high, increase
+
+PositionTracker threshold_channel:
+    If z-noise looks pretty bad, maybe increase this
+
+
+
+~~~~~~~~Parameter Information:~~~~~~~~~~~~~
+
+Pipeline: (pipeline.py)
+    number of unique signals to track: num_channels
+    Channels with data we actually care about: valid_channels
+    communication port: com
+    baudrate: baudrate
+    serial object we want to grab data from: ser
+    
+    read_serial_line_to_data_list()
+        end of line sequence from bluetooth readout: eol
+    calibrate()
+        number of calibration samples: NUM_CALIBRATION_SAMPLES
+        maximum number of calibration attemps: MAX_CALIBRATION_ATTEMPTS
+        maximum number of bad samples: MAX_BAD_SAMPLES
+        thresholds beyond which we consider the sample bad: ADC_LOW_THRESHOLD, ADC_HIGH_THRESHOLD ## Note: you should change these back!! 
+    convert_ADC_to_deltaf()
+        f_LO to use: f_LO
+        N factor: factor
+    
+
+PositionTracker: (positiontracker.py)
+    number of samples to average: num_samples_to_avg
+    value of change that when a channel is above this, we should stop averaging: threshold_delta_values ## Note: Not currently used. Toss?
+
+    LocationComputer: (compute_location_ratio_ITOdisp.py)
+        ratios used: ratio_dictionaries
+        z-direction channel thresholds: threshold_channel
+        z-direction maximum sum value: max_sum_value
+
+        calculate_2D_position()
+            horizontal/vertical channel specifications: hor_channels, vert_channels
+            channel distance in real space: channel_distance (in calls to get_location_deltaf) ## Note: This value isn't actually used anywhere. Should be deleted from the code at some point. 
+        get_ratios_to_consider()
+            value below which we ignore the channel completely: value_threshold
+        get_norm_position()
+            max ratio between channels: threshold_ratio
+
+CursorDemo: (cursordemo.py)
+    background color: bgcolor
+    screen size/type: screen_height, screen_width, screen
+    cursor size: square_size
+    z-position limit (below which cursor disappears) z_pos_limit
+
+
+
