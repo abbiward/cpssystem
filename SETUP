@@ -16,7 +16,8 @@ virtualenv env
 
 ################# STEP 3 ###########################
 # now install all necessary packages...
-# If, when you run the code, it says that a module is missing, you can probably install it using these same commands
+# If, when you run the code, it says that a module is missing, you can probably install it using 
+#           these same commands
 #   i.e. env/bin/pip install missingmodule
 env/bin/pip install numpy
 env/bin/pip install pyserial
@@ -30,5 +31,41 @@ env/bin/pip install hg+http://bitbucket.org/pygame/pygame
 # At the end, it should say successfully installed pygame
 
 
+################# STEP 4 ###########################
+# Test that it works...
+# ----------------------------------------
+# Test 1: 
+cd bluetooth/
+
+# A) connect to the serial bluetooth. 
+# plug in the USB
+ls /dev/cu.*
+# There should be some entry with usbserial in the name (i.e. cu.usbserial-AE00FRN7)
+# This is your usb device. Connect to it using screen.
+# We've used a baudrate of 115200 bps because that the baudrate of the bluetooth module on the board
+screen /dev/cu.usbserial-AE00FRN7 115200
+
+# Hook up to circuit board via AT command
+# If you don't know the address of your bluetooth module, use the following
+ATDILE
+# This will list some addresses similar to ECFE7E107107
+# Connect to these via ATDMLE
+    # ITO screen
+ATDMLE,ECFE7E107107
+
+# B) Run the test
+../env/bin/python testpyserial.py stdout 40
+
+# ----------------------------------------
+# Test 2:
+# This program connects to bluetooth automatically, so there's no need for step A from above.
+
+cd displaydemo
+
+../env/bin/python rundemo.py
+
+# This should display a small orange screen with a white cursor. As you move your hand in front of
+# the sensor array, the cursor should follow it. Some adjustment of parameters may be necessary when 
+# transitioning between different system types. See ~/configurations.py for more information
 
 
