@@ -4,7 +4,10 @@
 # statements
 '''
 import sys
-sys.path.append("/Users/aaward/Dropbox/IW/displaydemo")
+#sys.path.append("/Users/aaward/Dropbox/IW/displaydemo")
+import os
+# Need to add folder to path that contains the relevant sys modules
+sys.path.append(os.path.abspath(os.path.join('', os.pardir, 'displaydemo')))
 import cursordemo
 import pipeline
 import positiontracker
