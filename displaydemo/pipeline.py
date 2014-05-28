@@ -25,8 +25,8 @@ sys.path.append(os.path.abspath(os.path.join('', os.pardir)))
 import configurations as config     # custom configuration parameters
 
 class Pipeline():
-    def __init__(self, valid_channels=config.valid_channels, com=config.com, baudrate=config.baudrate, errorlog=None,
-        usefakedata=False):  
+    def __init__(self, valid_channels=config.valid_channels, com=config.com, 
+        baudrate=config.baudrate, errorlog=None, usefakedata=False):  
         self.ser_port = com
         self.ser_baudrate = baudrate
         if errorlog:
@@ -136,7 +136,8 @@ class Pipeline():
     # calibrate Collect several calibration samples and average them to get base
     # calibration values. It is assumed that these samples are collected during
     # a period of no interaction. 
-    def calibrate(self, ser, num_channels=8, f_LO=config.f_LO, num_calibration_attempts=0, factor=config.factor):
+    def calibrate(self, ser, num_channels=8, f_LO=config.f_LO,
+        num_calibration_attempts=0, factor=config.factor):
         NUM_CALIBRATION_SAMPLES = 20
         MAX_CALIBRATION_ATTEMPTS = 3
         MAX_BAD_SAMPLES = 6
@@ -195,7 +196,8 @@ class Pipeline():
 
     # convert
     # Note: trackpad/touchpad factor=config.factor
-    def convert_ADC_to_deltaf(self, freq_ctr, data, num_channels=8, f_LO=config.f_LO, factor=config.factor):
+    def convert_ADC_to_deltaf(self, freq_ctr, data, num_channels=8,
+        f_LO=config.f_LO, factor=config.factor):
         data = map(int, data)
         freq_delta = [0]*num_channels
         try:
