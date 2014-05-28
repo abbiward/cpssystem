@@ -19,8 +19,9 @@ import numpy as np
 import re
 import time
 import errorlog as el
-
-sys.path.append("/Users/aaward/Dropbox/IW")
+import os
+sys.path.append(os.path.abspath(os.path.join('', os.pardir)))
+#sys.path.append("/Users/aaward/Dropbox/IW")
 import configurations as config     # custom configuration parameters
 
 class Pipeline():

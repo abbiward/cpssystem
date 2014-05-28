@@ -3,7 +3,9 @@ import pygame as pg
 import time
 from pygame.locals import *
 import sys
-sys.path.append("/Users/aaward/Dropbox/IW")
+import os
+sys.path.append(os.path.abspath(os.path.join('', os.pardir)))
+# sys.path.append("/Users/aaward/Dropbox/IW")
 import configurations as config
 
 class GestureDemo:

@@ -16,7 +16,10 @@ import compute_location_ratio_ITOdisp as pt
 import numpy as np
 import errorlog as el
 import sys
-sys.path.append("/Users/aaward/Dropbox/IW")
+import os
+sys.path.append(os.path.abspath(os.path.join('', os.pardir)))
+
+# sys.path.append("/Users/aaward/Dropbox/IW")
 import configurations as config
 
 class PositionTracker():
