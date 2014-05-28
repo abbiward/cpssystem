@@ -35,3 +35,11 @@ The system uses dynamic time warping for some simple gesture recognition. This a
 
 Thanks.
 
+<h1>Additional Notes</h1>
+
+Abbreviations:
+<ul>
+
+<li>df = deltaf = change in frequency created because of human presence </li>
+<li>adc = the digital values received from the board (adc = analog to digital conversion) </li>
+</ul>
