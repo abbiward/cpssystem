@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# TIME1="310pm"
+FILENAME="documentingdrift-4-27-14-"$TIME1
+# FILENAME="testingmovement-4-25-14-"$TIME1
+FILE1="-values-tmp-longtermtmp"
+FILE2="-pgmtimes-tmptmp"
+
+echo $FILENAME
+echo $FILE1
+echo $FILE2
+
+echo "tmp/"$FILENAME
+
+cp "tmp-longterm.tmp" "tmp/"$FILENAME$FILE1
+cp "tmp.tmp" "tmp/"$FILENAME$FILE2
+
+cd "tmp"
+
+grep "df:" $FILENAME$FILE1 > $FILENAME-dfvalues
+grep "adc:" $FILENAME$FILE1 > $FILENAME-adcvalues
+
+sed -i .bak 's/df:\[//g' $FILENAME-dfvalues
+sed -i .bak 's/\]//g' $FILENAME-dfvalues
+sed -i .bak 's/, /	/g' $FILENAME-dfvalues
+
+
