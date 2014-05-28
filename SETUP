@@ -1,0 +1,40 @@
+#####
+# These are some initial instructions for how to setup a system such that it can interact with the CPS system.
+# Don't just run this as a script. Bad things will probably happen.
+# Currently, the code will only work on Macs 
+
+
+################# STEP 1 ###########################
+# install brew and install brew's python (comes with pip)
+brew install python
+
+
+################# STEP 2 ###########################
+# Install virtualenv and create a virtual environment in the directory where you want to run the program.
+pip install virtualenv
+# cd ~/mydir
+virtualenv env
+
+
+################# STEP 3 ###########################
+# now install all necessary packages...
+# If, when you run the code, it says that a module is missing, you can probably install it using these same commands
+#   i.e. env/bin/pip install missingmodule
+env/bin/pip install numpy
+env/bin/pip install pyserial
+env/bin/pip install matplotlib 
+
+# Installing pygame for Mac...
+# https://bitbucket.org/pygame/pygame/issue/82/homebrew-on-leopard-fails-to-install#comment-627494
+brew install mercurial
+brew install sdl sdl_image sdl_mixer sdl_ttf portmidi
+env/bin/pip install hg+http://bitbucket.org/pygame/pygame
+# At the end, it should say successfully installed pygame
+
+# now change the filepath for the configurations file :(
+
+# list all the files with the current path name
+grep "aaward\/Dropbox" *
+
+
+
