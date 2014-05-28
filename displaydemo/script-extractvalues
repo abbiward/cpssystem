@@ -1,27 +1,29 @@
 #!/bin/bash
 
 # TIME1="310pm"
-FILENAME="documentingdrift-4-27-14-"$TIME1
+FILENAMEBASE="documentingdrift-4-27-14-"$TIME1
 # FILENAME="testingmovement-4-25-14-"$TIME1
 FILE1="-values-tmp-longtermtmp"
 FILE2="-pgmtimes-tmptmp"
+DIRNAME="tmp/"
 
-echo $FILENAME
+echo $FILENAMEBASE
 echo $FILE1
 echo $FILE2
+echo $DIRNAME$FILENAMEBASE
 
-echo "tmp/"$FILENAME
+# Copy all recorded data into new (unique) location
+cp "tmp-longterm.tmp" $DIRNAME$FILENAMEBASE$FILE1
+cp "tmp.tmp" $DIRNAME$FILENAMEBASE$FILE2
 
-cp "tmp-longterm.tmp" "tmp/"$FILENAME$FILE1
-cp "tmp.tmp" "tmp/"$FILENAME$FILE2
+# Extract df and adc information
+cd $DIRNAME
+grep "df:" $FILENAMEBASE$FILE1 > $FILENAMEBASE-dfvalues
+grep "adc:" $FILENAMEBASE$FILE1 > $FILENAMEBASE-adcvalues
 
-cd "tmp"
-
-grep "df:" $FILENAME$FILE1 > $FILENAME-dfvalues
-grep "adc:" $FILENAME$FILE1 > $FILENAME-adcvalues
-
-sed -i .bak 's/df:\[//g' $FILENAME-dfvalues
-sed -i .bak 's/\]//g' $FILENAME-dfvalues
-sed -i .bak 's/, /	/g' $FILENAME-dfvalues
+# Remove the formatting issues from the dfvalues file
+sed -i .bak 's/df:\[//g' $FILENAMEBASE-dfvalues
+sed -i .bak 's/\]//g' $FILENAMEBASE-dfvalues
+sed -i .bak 's/, /	/g' $FILENAMEBASE-dfvalues
 
 
