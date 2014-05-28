@@ -21,90 +21,7 @@ Example Applications to set up:
 	Maze game (Halo?)
 		need only xyz position
 	Building block game
-
-
-
 '''
-
-'''
-class GestureRecognizer:
-	def __init__(self):
-		hor_channels = [4,3,2,1]
-		vert_channels = [7,6,5]
-
-		self.gesture_dict = {(1,2,3,4):'rswipe',
-						(4,3,2,1):'lswipe',
-						(5,6,7):'dswipe',
-						(7,6,5):'uswipe'
-						# (1,2,3):'rswipe'
-						# (2,3,4):'rswipe'
-						}
-
-		self.window = []
-		self.window_size = 60
-		self.test_frequency = 20 # test for gestures every 20 samples
-		self.test_frequency_counter = 0
-
-
-	def extract_peaks(self,freq_ctr,data,index):
-		# extract peaks from the given data in the given index
-		peak_threshold = 100
-		# we define a 'peak' as a deviation from the 'freq_ctr' values by more than peak_threshold
-		# and the value must come down below peak_threshold before another peak can be considered
-		## TODO: FIX: for now, we only allow one peak per window per channel
-		## TODO: use numpy arrays to do this crap faster
-		## TODO: keep track of things over time via sliding window
-		##		do this by having a data variable which stores data over time
-		##		update_window is called with every new sample
-		##		
-
-
-	def update_window(self,data):
-		# cry :(
-		# add sample to curr_window
-		self.window.append(data)
-		if len(self.window) > self.window_size:
-			self.window.remove(0) # hsould this be .pop?
-
-		# maybe check if theres a gesture in the window?
-		if (self.test_frequency_counter == self.test_frequency):
-			self.get_gesture(freq_ctr)
-			self.test_frequency_counter = 0
-		self.test_frequency_counter += 1
-
-
-	def get_gesture(self,freq_ctr,data_x,data_y):
-		# data_x: time series of deltaf data for x-dimension
-		# data_y: time series of deltaf data for y-dimension
-
-		peak_order_x = []
-		for i in range(len(data_x[0])):
-			peak_indices = self.extract_peaks(freq_ctr,data_x,i)
-			for item in peak_indices:
-				peak_order.append((item,i))
-
-		peak_order_y = []
-		for i in range(len(data_y[0])):
-			peak_indices = self.extract_peaks(freq_ctr,data_y,i)
-			for item in peak_indices:
-				peak_order.append((item,i))
-
-		# peak order lists are of the form: [(time1,channeli), (time2,channelj)]
-		# sort the peak order based on the time
-		peak_order_x.sort(key=lambda item:item[0])
-		peak_order_y.sort(key=lambda item:item[0])
-		peak_order_x_final = [item[1] for item in peak_order_x]
-		peak_order_y_final = [item[1] for item in peak_order_y]
-
-		if peak_order_x_final in self.gesture_dict:
-			return gesture_dict[peak_order_x_final]
-		if peak_order_y_final in self.gesture_dict:
-			return gesture_dict[peak_order_y_final]
-		return None
-'''
-
-
-
 
 ################################################################################
 class Window:
@@ -196,7 +113,7 @@ class XYZAnalysis:
 
 		return None
 
-
+################################################################################
 import dtw
 import numpy as np
 import gestlib
@@ -247,14 +164,7 @@ class PathAnalysis:
 			# return None
 
 		# If you're returning a gesture, clear the first 5 entries of the window
-
-
 		return best_gesture
-
-	# TODO: implement dtwmatching
-	# TODO: trim starting 0's
-
-
 
 class GestureRecognizer:
 	def __init__(self):
