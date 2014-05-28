@@ -8,13 +8,11 @@
 # install brew and install brew's python (comes with pip)
 brew install python
 
-
 ################# STEP 2 ###########################
 # Install virtualenv and create a virtual environment in the directory where you want to run the program.
 pip install virtualenv
 # cd ~/mydir
 virtualenv env
-
 
 ################# STEP 3 ###########################
 # now install all necessary packages...
@@ -31,10 +29,6 @@ brew install sdl sdl_image sdl_mixer sdl_ttf portmidi
 env/bin/pip install hg+http://bitbucket.org/pygame/pygame
 # At the end, it should say successfully installed pygame
 
-# now change the filepath for the configurations file :(
-
-# list all the files with the current path name
-grep "aaward\/Dropbox" *
 
 
 
